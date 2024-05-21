@@ -2,6 +2,7 @@ import { React, createContext, useState } from "react";
 import PropTypes from "prop-types";
 import { food_list } from "../assets/assets";
 import { useEffect } from "react";
+import axios from "axios";
 
 
 export const StoreContext = createContext(null);
