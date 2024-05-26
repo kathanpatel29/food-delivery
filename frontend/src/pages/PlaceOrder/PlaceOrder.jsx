@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
-import axios from 'axios'; // Import axios for making HTTP requests
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import './PlaceOrder.css';
 import { StoreContext } from '../../context/StoreContext';
 
 const PlaceOrder = () => {
-  const { getTotalCartAmount, token, food_list, cartItems, url } = useContext(StoreContext);
-  const navigate = useNavigate(); // Initialize useNavigate for navigation
+  const { getTotalCartAmount, token, foodList, cartItems, url } = useContext(StoreContext);
+  const navigate = useNavigate();
 
   const [data, setData] = useState({
     firstName: "",
@@ -27,7 +27,7 @@ const PlaceOrder = () => {
 
   const placeOrder = async (event) => {
     event.preventDefault();
-    const orderItems = food_list.reduce((acc, item) => {
+    const orderItems = foodList.reduce((acc, item) => {
       if (cartItems[item._id] > 0) {
         const itemInfo = { ...item, quantity: cartItems[item._id] };
         acc.push(itemInfo);
@@ -36,10 +36,13 @@ const PlaceOrder = () => {
     }, []);
 
     const orderData = {
+      userId: "replace_with_actual_user_id", // Replace with actual user ID
       address: data,
       items: orderItems,
       amount: getTotalCartAmount() + 2
     };
+
+    console.log("Order data being sent:", orderData);
 
     try {
       const response = await axios.post(`${url}/api/order/place`, orderData, { headers: { token } });
@@ -51,14 +54,15 @@ const PlaceOrder = () => {
       }
     } catch (error) {
       console.error("Error placing order:", error);
+      if (error.response) {
+        console.error("Response data:", error.response.data);
+      }
       alert("Error placing order. Please try again.");
     }
   };
 
   useEffect(() => {
-    if (!token) {
-      navigate('/cart');
-    } else if (getTotalCartAmount() === 0) {
+    if (!token || getTotalCartAmount() === 0) {
       navigate('/cart');
     }
   }, [token, getTotalCartAmount, navigate]);
