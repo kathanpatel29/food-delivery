@@ -1,0 +1,18 @@
+# Frontend Build
+[build]
+  base = "frontend"               # Path to the frontend folder
+  publish = "frontend/dist"        # Path to the folder where build output is placed (Vite, React, etc.)
+  command = "npm run build"        # Build command for frontend (you can use yarn if needed)
+
+# Admin Build (separate build section for Admin)
+[[build]]
+  base = "admin"                  # Path to the admin folder
+  publish = "admin/dist"           # Path to the folder where admin build output is placed
+  command = "npm run build"        # Build command for admin
+
+# Backend Build (separate build section for Backend - typically for serverless functions)
+[[build]]
+  base = "backend"                # Path to the backend folder
+  publish = "backend/dist"         # This could be where your backend build output is (e.g., serverless functions)
+  command = "npm run build"        # Build command for backend
+  functions = "backend/functions" # Directory where Netlify should look for serverless functions
