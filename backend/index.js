@@ -1,4 +1,4 @@
-// server.js (backend entry point)
+// index.js (backend entry point)
 
 // Import necessary modules
 import express from "express";
