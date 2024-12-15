@@ -22,11 +22,12 @@ const port = process.env.PORT || 4000;
 // Middleware
 const corsOptions = {
   origin: [
-    "https://food-delivery-phi-umber.vercel.app",  // Frontend Vercel URL
-    "https://food-delivery-1x6h.vercel.app",      // Admin Vercel URL
+    "https://food-delivery-phi-umber.vercel.app",  // Frontend
+    "https://food-delivery-1x6h.vercel.app",      // Admin
+    "https://food-delivery-backend-beta.vercel.app" // Backend
   ],
   methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true, // Allow cookies if needed
+  credentials: true
 };
 app.use(express.json());
 app.use(cors(corsOptions));
