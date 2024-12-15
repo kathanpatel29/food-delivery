@@ -13,7 +13,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 // Load environment variables
-dotenv.config();
+dotenv.config({ path: './.env' });
 
 // App config
 const app = express();
