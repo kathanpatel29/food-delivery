@@ -45,10 +45,6 @@ app.use("/api/user", userRouter);
 app.use("/api/cart", cartRouter);
 app.use("/api/order", orderRouter);
 
-// Example route using the PlaceOrder component
-app.use('/place-order', (req, res) => {
-  res.send(PlaceOrder());
-});
 
 app.get("/", (req, res) => {
   res.send("API Working");
