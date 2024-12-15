@@ -20,8 +20,16 @@ const app = express();
 const port = process.env.PORT || 4000;
 
 // Middleware
+const corsOptions = {
+  origin: [
+    "https://food-delivery-phi-umber.vercel.app",  // Frontend Vercel URL
+    "https://food-delivery-1x6h.vercel.app",      // Admin Vercel URL
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true, // Allow cookies if needed
+};
 app.use(express.json());
-app.use(cors());
+app.use(cors(corsOptions));
 
 // DB connection
 connectDB();
